@@ -4,6 +4,7 @@ html {
 
 body {
   margin: 0;
+  background-color: #eeeeee;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -129,9 +130,6 @@ a {
 
 /* Project and processes section */
 
-.processes-section {
-}
-
 .section-title {
   text-align: center;
   margin-bottom: 1rem;
@@ -149,16 +147,19 @@ a {
 .process-box {
   text-align: center;
   border-radius: 0.2rem;
+  background-color: #424242;
   font-size: 16px;
-  height: 20rem;
+  height: 25rem;
   margin-top: 1rem;
   width: 100%;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  transition: .2s;
 }
 
 .process-box:hover {
   cursor: pointer;
+  transform: translateY(-2px);
 }
 
 .processes-row {
@@ -168,6 +169,7 @@ a {
 
 .process-title {
   font-weight: 600;
+  color: #f5f5f5;
   border-bottom: 1px solid#bdbdbd;
   display: flex;
   justify-content: center;
@@ -177,13 +179,15 @@ a {
 .process-content {
   margin-top: 1rem;
   padding: 5px;
+  color: #f5f5f5;
 }
 
 .process-tools {
   padding: 5px;
+  color: #f5f5f5;
 }
 
-.process-tools p {
+.tools-title {
   color: #e3a50f;
   font-weight: 600;
   text-decoration: underline;
@@ -196,6 +200,10 @@ a {
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
   width: 30%;
+}
+
+.process-icon {
+  margin-top: 1rem;
 }
 
 /* Projects and processes section ends here  */
