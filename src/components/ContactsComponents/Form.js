@@ -54,7 +54,6 @@ export default function Form() {
         setCloseToaster(true);
       })
       .catch((err) => {
-        console.log(err);
         setError(true);
         setLoading(false);
         setCloseToaster(true);
@@ -67,6 +66,14 @@ export default function Form() {
     setSuccess(false);
     setError(false);
     setCloseToaster(false);
+  };
+
+  const validateForm = () => {
+    if (name === "" || email === "" || message === "") {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   return (
@@ -89,6 +96,7 @@ export default function Form() {
             id="outlined"
             label="Your Name"
             variant="outlined"
+            required={true}
             onChange={(e) => setName(e.target.value)}
           />
           <TextField
@@ -97,6 +105,7 @@ export default function Form() {
             variant="outlined"
             type="email"
             size="small"
+            required={true}
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
@@ -104,6 +113,7 @@ export default function Form() {
             label="Your message"
             multiline
             rowsMax={20}
+            required={true}
             variant="outlined"
             onChange={(e) => setMessage(e.target.value)}
           />
@@ -113,7 +123,11 @@ export default function Form() {
               color="primary"
               className={classes.button}
               endIcon={<SendIcon />}
-              onClick={() => submitForm()}
+              onClick={() => {
+                if (validateForm()) {
+                  submitForm();
+                }
+              }}
             >
               Send
             </Button>
