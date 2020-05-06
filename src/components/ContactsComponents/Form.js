@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
+import Toaster from "../NotificationComponents/Toaster";
 import { makeStyles } from "@material-ui/core/styles";
 import SendIcon from "@material-ui/icons/Send";
 import Button from "@material-ui/core/Button";
@@ -35,59 +36,90 @@ export default function Form() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [showToaster, setShowToaster] = useState(false);
+  const [closeToaster, setCloseToaster] = useState(false);
 
   const submitForm = () => {
+    setLoading(true);
+    setShowToaster(true);
     const sendMail = firebase.functions().httpsCallable("sendMail");
     sendMail({ details: { name, email, message } })
       .then((res) => {
         // Send contact details to firestore database
-
-        alert("Your message has been sent.");
+        setSuccess(true);
+        setLoading(false);
+        setCloseToaster(true);
       })
       .catch((err) => {
         console.log(err);
-        alert("There was an error sending your message.");
+        setError(true);
+        setLoading(false);
+        setCloseToaster(true);
       });
   };
 
+  const removeToaster = () => {
+    setShowToaster(false);
+    setLoading(false);
+    setSuccess(false);
+    setError(false);
+    setCloseToaster(false);
+  };
+
   return (
-    <form className={classes.root} noValidate autoComplete="off">
-      <div>
-        <TextField
-          size="small"
-          id="outlined"
-          label="Your Name"
-          variant="outlined"
-          onChange={(e) => setName(e.target.value)}
+    <div>
+      {showToaster ? (
+        <Toaster
+          loading={loading}
+          success={success}
+          error={error}
+          closeToaster={closeToaster}
+          removeToaster={removeToaster}
         />
-        <TextField
-          id="outlined"
-          label="Your Email"
-          variant="outlined"
-          type="email"
-          size="small"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          id="standard-multiline-flexible"
-          label="Your message"
-          multiline
-          rowsMax={20}
-          variant="outlined"
-          onChange={(e) => setMessage(e.target.value)}
-        />
+      ) : (
+        ""
+      )}
+      <form className={classes.root} noValidate autoComplete="off">
         <div>
-          <Button
+          <TextField
+            size="small"
+            id="outlined"
+            label="Your Name"
             variant="outlined"
-            color="primary"
-            className={classes.button}
-            endIcon={<SendIcon />}
-            onClick={() => submitForm()}
-          >
-            Send
-          </Button>
+            onChange={(e) => setName(e.target.value)}
+          />
+          <TextField
+            id="outlined"
+            label="Your Email"
+            variant="outlined"
+            type="email"
+            size="small"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            id="standard-multiline-flexible"
+            label="Your message"
+            multiline
+            rowsMax={20}
+            variant="outlined"
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <div>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              endIcon={<SendIcon />}
+              onClick={() => submitForm()}
+            >
+              Send
+            </Button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
