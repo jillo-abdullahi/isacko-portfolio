@@ -37,7 +37,7 @@ const processes = {
 
 const Projects = () => {
   return (
-    <div className="projects-content">
+    <div className="container projects-content">
       <div className="processes-section">
         <div className="section-title">
           <h4>Data Engineer Blueprint</h4>

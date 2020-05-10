@@ -6,10 +6,10 @@ import Contact from "./components/ContactsComponents/Contact";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header" id="landing">
         <Landing />
       </header>
-      <section className="container processes-section" id="processes">
+      <section className="processes-section" id="processes">
           <Projects />
       </section>
       <section className="contacts-section" id="contacts">
