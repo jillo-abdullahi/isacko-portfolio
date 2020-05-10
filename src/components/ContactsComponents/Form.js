@@ -179,7 +179,7 @@ export default function Form() {
               size="small"
               id="outlined"
               label="Your Name"
-              variant="outlined"
+              variant="filled"
               fullWidth
               required={true}
               onInput={(e) => validateName(e.target.value)}
@@ -193,7 +193,7 @@ export default function Form() {
               label="Your Email"
               fullWidth
               classes={classes.textfield}
-              variant="outlined"
+              variant="filled"
               type="email"
               size="small"
               required={true}
@@ -210,7 +210,7 @@ export default function Form() {
               multiline
               rowsMax={20}
               required={true}
-              variant="outlined"
+              variant="filled"
               onInput={(e) => validateMessage(e.target.value)}
               onChange={(e) => setMessage(e.target.value)}
             />

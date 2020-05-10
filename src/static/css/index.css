@@ -325,8 +325,9 @@ a {
 }
 
 .MuiInputBase-root {
-  color: black;
+  color: #bdbdbd;
 }
+
 
 @media (max-width: 768px) {
   .contacts-form {
